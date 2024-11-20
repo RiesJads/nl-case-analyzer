@@ -1,8 +1,7 @@
 
 import os
-from nl_case_analyzer.openai_api import XXX
 from nl_case_analyzer.data_loader import CSV_Loader
-
+from nl_case_analyzer.openai import API_KEY
 
 
 def main():
@@ -21,4 +20,6 @@ def main():
     print(df.head())
 
 if __name__ == "__main__":
+    print(API_KEY)
+
     main()
