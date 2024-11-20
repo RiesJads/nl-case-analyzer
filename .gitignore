@@ -1,0 +1,41 @@
+# Ignore the virtual environment
+.venv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files and temporary files
+*.log
+*.tmp
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore environment variables and secrets
+.env
+*.env
+
+# Ignore data files or other large files (if they should not be version controlled)
+data/
+
+# Ignore coverage and test reports
+.coverage
+coverage/
+htmlcov/
+
+# Ignore compiled files
+*.so
+*.o
+*.a
+*.out
+
+# Ignore Poetry lock file (Optional, generally you keep it for reproducibility)
+# poetry.lock
