@@ -1,8 +1,7 @@
 # Class to configure API + Response JSON SCHEMA
 
 import os
-import openai
-
+from openai import OpenAI
 
 class ConfigGPT:
 
@@ -18,8 +17,9 @@ class ConfigGPT:
         self.api_key = os.getenv("OPENAI_API")
         if not self.api_key:
             raise ValueError("API key is not set in the environment variable 'OPENAI_API'.")
-        openai.api_key = self.api_key
+        
 
+        self.client = OpenAI(api_key=self.api_key)
         ## system prompt
         self.system_prompt = """
         Je bent een taalmodel dat gespecialiseerd is in het analyseren van samenvattingen van gerechtelijke uitspraken. Je taak is om de tekstfragmenten te analyseren en de correcte sleutelfiguren te identificeren. Deze sleutelfiguren zijn:
@@ -40,7 +40,7 @@ class ConfigGPT:
 
         Je moet altijd output produceren die strikt voldoet aan het volgende JSON-schema:
 
-        [Voeg het bijgewerkte JSON-schema hier in]
+        {self.json_schema}
 
         **Belangrijk:**
 
@@ -53,7 +53,6 @@ class ConfigGPT:
         # JSON SCHEMA
         self.json_schema  = {
         "name": "sleutelfiguren_schema",
-        "strict": True,
         "schema": {
             "type": "object",
             "properties": {
@@ -222,6 +221,8 @@ class ConfigGPT:
             dict: A dictionary containing system prompt, parameters, and JSON schema.
         """
         return {
+            "client": self.client,
+
             "api_key": self.api_key,
             "system_prompt": self.system_prompt,
             "json_schema": self.json_schema,

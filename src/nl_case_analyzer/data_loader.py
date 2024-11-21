@@ -42,9 +42,50 @@ class CSV_Loader:
             print(f"File not found at path: {self.path}")
             return pd.DataFrame()
 
-    def generate_txt_snippets(self, df):
+    def generate_txt_snippets(self, df: pd.DataFrame, column_name: str) -> list:
         """
-        Prepares snippets of text from df to be inputted in API call
-        """
+        Prepares snippets of text from a DataFrame column to be inputted in API call.
 
-        return list
+        Args:
+            df (pd.DataFrame): Input DataFrame containing the text data.
+            column_name (str): Name of the column containing the text snippets.
+
+        Returns:
+            list: A list of text snippets.
+        """
+        if column_name in df.columns:
+            # Extract non-null snippets from the specified column
+            snippets = df[column_name].dropna().tolist()
+            return snippets
+        else:
+            # Return an empty list with a message if the column is not found
+            print(f"Column '{column_name}' not found in DataFrame.")
+            return []
+        
+    def validate_txt(self, df: pd.DataFrame, column_name: str) -> list:
+        """
+        Validates if the DataFrame is not empty, previews its content, and generates snippets.
+
+        Args:
+            df (pd.DataFrame): Input DataFrame to validate.
+            column_name (str): Name of the column to generate text snippets from.
+
+        Returns:
+            list: A list of text snippets if DataFrame is valid; otherwise, an empty list.
+        """
+        if not df.empty:
+            print("Data loaded successfully. Here's a preview:")
+            print(df.head())
+
+            # Generate text snippets from the specified column
+            snippets = self.generate_txt_snippets(df, column_name=column_name)
+            print(f"Generated {len(snippets)} snippets.")
+
+            # Preview the first 2 snippets
+            for i, snippet in enumerate(snippets[:2]): 
+                print(f"Snippet {i + 1}: {snippet}")
+
+            return snippets
+        else:
+            print("No data available for the specified filter criteria.")
+            return []   
