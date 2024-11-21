@@ -24,7 +24,7 @@ Thumbs.db
 *.env
 
 # Ignore data files or other large files (if they should not be version controlled)
-data/
+#data/
 
 # Ignore coverage and test reports
 .coverage
