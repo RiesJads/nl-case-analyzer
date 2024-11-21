@@ -50,7 +50,7 @@ class ConfigGPT:
         - **Vermijd algemene of vage termen; wees zo specifiek mogelijk.**
         """
 
-
+        # JSON SCHEMA
         self.json_schema  = {
         "name": "sleutelfiguren_schema",
         "strict": True,
@@ -215,7 +215,18 @@ class ConfigGPT:
             "temperature": 0.2,
             "max_tokens": 3000
         }
+    def get_configuration(self):
+        """
+        Fetches the configuration for the API.
+        Returns:
+            dict: A dictionary containing system prompt, parameters, and JSON schema.
+        """
+        return {
+            "api_key": self.api_key,
+            "system_prompt": self.system_prompt,
+            "json_schema": self.json_schema,
+            "parameters": self.parameters
+        }
 
-        
         
     
