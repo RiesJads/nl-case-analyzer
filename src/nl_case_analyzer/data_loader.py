@@ -42,3 +42,9 @@ class CSV_Loader:
             print(f"File not found at path: {self.path}")
             return pd.DataFrame()
 
+    def generate_txt_snippets(self, df):
+        """
+        Prepares snippets of text from df to be inputted in API call
+        """
+
+        return list
