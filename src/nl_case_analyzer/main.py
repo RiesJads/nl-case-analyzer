@@ -38,7 +38,7 @@ def main():
 
         # Analyze 1 each snippet
         print("Starting API calls for text snippets...")
-        results = openai_api.analyze_snippets(snippets[:50], timeout=2)
+        results = openai_api.analyze_snippets(snippets[:20], timeout=2)
 
         # write JSON (list of jsons)
         json_writer = JSONWriter(output_dir)

@@ -22,12 +22,14 @@ class AnalyzeGPT:
                 temperature=self.parameters["temperature"],
                 max_tokens=self.parameters["max_tokens"],
                 
-                functions=[self.json_schema],
-                function_call={"name": "sleutelfiguren_schema"}
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": self.json_schema
+                }
             )
-            print(response)  # Debug the response structure
-            arguments = response.choices[0].message.function_call.arguments
-            return arguments
+
+
+            return response.choices[0].message.content
         except Exception as e:
             print(f"Error analyzing text: {e}")
             return None

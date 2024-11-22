@@ -207,7 +207,8 @@ class ConfigGPT:
             "sleutelfiguur_3"
             ],
             "additionalProperties": False
-        }
+        },
+        "strict": True
         }
         self.parameters = {
             "model": "gpt-4o",
