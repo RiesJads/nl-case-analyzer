@@ -1,6 +1,10 @@
 # LLM court case project
 Project continuation of thesis to analyze generated court case summaries. 
 - Provide addtional insights into distribution of the viewpoints regarding crypt-data evidence of each keyfigure in the dutch court system
+- Labels include
+&nbsp - Trustworthiness
+&nbsp - Trustworthiness
+&nbsp - Trustworthiness
 
 
 
