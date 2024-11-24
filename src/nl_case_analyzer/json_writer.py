@@ -15,17 +15,7 @@ class JSONWriter:
             output_dir (str): The directory where the JSON files will be saved.
         """
         self.output_dir = output_dir
-        self.ensure_directory_exists()
 
-    def ensure_directory_exists(self):
-        """
-        Ensures the output directory exists. Creates it if it does not exist.
-        """
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
-            print(f"Created directory: {self.output_dir}")
-        else:
-            print(f"Directory already exists: {self.output_dir}")
 
     def write_json(self, data, file_name: str):
         """
@@ -43,7 +33,7 @@ class JSONWriter:
         try:
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4, ensure_ascii=False)
-            print(f"Data successfully saved to: {file_path}")
+            print(f"Results successfully saved to: {file_path} MATE")
             return file_path
         except Exception as e:
             print(f"Failed to save JSON data: {e}")

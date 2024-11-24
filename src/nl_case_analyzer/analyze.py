@@ -21,6 +21,10 @@ class AnalyzeGPT:
                 ],
                 temperature=self.parameters["temperature"],
                 max_tokens=self.parameters["max_tokens"],
+                top_p = self.parameters["top_p"],
+                frequency_penalty = self.parameters["frequency_penalty"],
+                presence_penalty = self.parameters["presence_penalty"],
+
                 
                 response_format={
                     "type": "json_schema",
