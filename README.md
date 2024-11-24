@@ -2,7 +2,7 @@
 Project continuation of thesis to analyze generated court case summaries. 
 - Provide addtional insights into distribution of the viewpoints regarding crypt-data evidence of each keyfigure in the dutch court system
 - Labels include Trustworthiness/Lawfullness/Convincing Evidence.
-- Values of labels (Ja = present in reasoning, Nee = Not present in reasoning, NVT = not enough information to classify)
+- Values of labels (Ja = evidence meets criteria, Nee = evidence does not meet criteria, NVT = not enough information to classify)
 
 
 
