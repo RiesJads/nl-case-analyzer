@@ -2,7 +2,7 @@
 name = "nl-case-analyzer"
 version = "0.1.0"
 description = ""
-authors = ["RiesJads <rrd.technl@gmail.com>"]
+authors = ["RiesJads"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
