@@ -3,6 +3,7 @@ import os
 from nl_case_analyzer.data_loader import CSV_Loader
 from nl_case_analyzer.openai_config import ConfigGPT
 from nl_case_analyzer.analyze import AnalyzeGPT
+from nl_case_analyzer.validate_json import ResponseValidator
 from nl_case_analyzer.json_writer import JSONWriter
 from nl_case_analyzer.visualizer import Visualizer
 
@@ -34,22 +35,49 @@ def main():
         config_gpt = ConfigGPT()
         config = config_gpt.get_configuration()
 
+        schema = config['json_schema']
+
         # Initialize the OpenAI API handler
         openai_api = AnalyzeGPT(config)
 
+        # Initialize the validation function 
+        validator = ResponseValidator(schema=schema)
+
+        
+
         # Analyze snippts
         print("Starting API calls for text snippets...")
-        results = openai_api.analyze_snippets(snippets[:200], timeout=2)
+        results = openai_api.analyze_snippets(snippets[600:], timeout=1)
+
+        # Validate
+        invalid_snippets = []
+        for idx, response in enumerate(results):
+            print(f"\n Validating Snippet {idx}")
+            if not validator.is_valid(response):
+                 print(f"Snippet {idx + 1} is invalid.")
+                 # append to list 
+                 invalid_snippets.append(idx)
+            else:
+                print(f"Snippet {idx + 1} is valid.")
+
+        print("\nSummary of Validation:")
+        if invalid_snippets:
+            print(f"The following snippets are invalid: {invalid_snippets}")
+        else:
+            print("All snippets are valid.")
+
 
         # write JSON (list of jsons)s
         json_writer = JSONWriter(output_dir)
-        result_file = json_writer.write_json(results, "Results.json")
+        result_file = json_writer.write_json(results, "Results_3.json")
+
+        print("checkpoint")
     
         # Visualization
         # results_file_path = os.path.join(output_dir, "Results.json")
-        visualizer = Visualizer(results, output_dir)
-        visualizer.generate_wordcloud()
-        visualizer.plot_label_distributions()
+        # visualizer = Visualizer(results, output_dir)
+        # visualizer.generate_wordcloud()
+        # visualizer.plot_label_distributions()
     
     else:
         print("Loading snippets went down the drain")
