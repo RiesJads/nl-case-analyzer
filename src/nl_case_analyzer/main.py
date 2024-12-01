@@ -1,5 +1,7 @@
 
 import os
+import json
+import glob
 from nl_case_analyzer.data_loader import CSV_Loader
 from nl_case_analyzer.openai_config import ConfigGPT
 from nl_case_analyzer.analyze import AnalyzeGPT
@@ -71,13 +73,23 @@ def main():
         json_writer = JSONWriter(output_dir)
         result_file = json_writer.write_json(results, "Results_3.json")
 
-        print("checkpoint")
     
+        # Loading in Results 
+        results_file_path = glob.glob(os.path.join(output_dir, "*.json"))
+        result_list = []
+
+        for file in results_file_path:
+
+            with open(file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                result_list.extend(data)
         # Visualization
-        # results_file_path = os.path.join(output_dir, "Results.json")
-        # visualizer = Visualizer(results, output_dir)
-        # visualizer.generate_wordcloud()
-        # visualizer.plot_label_distributions()
+
+        visualizer = Visualizer(result_list, output_dir)
+        visualizer.generate_wordcloud()
+        visualizer.plot_label_distributions()
+
+        print("chepoint mate")
     
     else:
         print("Loading snippets went down the drain")
